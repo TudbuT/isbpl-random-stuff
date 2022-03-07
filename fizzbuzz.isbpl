@@ -1,0 +1,16 @@
+func main {
+    def n 0 aget stol _int =n
+    def i 0 =i
+    while { i n gt not } {
+        i 3 % not dup if {
+            "Fizz" puts
+        } not ( i 5 % not dup ) if {
+            "Buzz" puts
+        } not and if {
+            i itos puts
+        }
+        "\n" puts
+        i inc
+    }
+    0
+}
