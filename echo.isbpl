@@ -1,9 +1,10 @@
-"#file.isbpl" include
+"#stream.isbpl" include
 
 func main {
     def args =args
+    def id "/dev/stdin" STREAM_CREATE_FILE_IN stream =id
     while { 1 } {
-        "/dev/stdin" _file 0 1 read 0 aget _char putchar
+        id STREAM_READ stream _char putchar
     }
     0
 }
