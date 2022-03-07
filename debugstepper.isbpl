@@ -1,0 +1,19 @@
+"#time.isbpl" include
+"#stream.isbpl" include
+native _enable_debug
+
+func main {
+    def args =args
+    def id "localhost" args 0 aget stol _int STREAM_CREATE_SOCKET stream =id
+    def time args 2 aget stol =time
+    _enable_debug itos puts
+    2000 sleep
+    "soff\n" id stream.write
+    time sleep
+    while { 1 } {
+        args 1 aget id stream.write
+        "\n" id stream.write
+        time sleep
+    }
+    0
+}
