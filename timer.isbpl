@@ -1,0 +1,10 @@
+"#iota.isbpl" include
+"#stream.isbpl" include
+"#errorstream.isbpl" include
+
+func main {
+    pop
+    def id "/dev/stdin" STREAM_CREATE_FILE_IN stream =id
+    id stream.readline puts
+    0
+}
