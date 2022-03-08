@@ -3,8 +3,9 @@
 func main {
     def args =args
     def id "/dev/stdin" STREAM_CREATE_FILE_IN stream =id
+    def oid "/dev/stdout" STREAM_CREATE_FILE_OUT stream =oid
     while { 1 } {
-        id STREAM_READ stream _char putchar
+        id STREAM_READ stream oid STREAM_WRITE stream
     }
     0
 }

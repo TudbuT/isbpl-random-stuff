@@ -1,0 +1,32 @@
+"#stream.isbpl" include
+
+def args
+def stdin "/dev/stdin" STREAM_CREATE_FILE_IN stream =stdin
+def pfile.in
+def pfile.out
+
+func main {
+    =args
+    args alen 1 lt if {
+        "Error: No file supplied.\n" puts
+    }
+    args 0 aget STREAM_CREATE_FILE_IN  stream =pfile.in
+    pfile.read
+}
+
+func pfile.read {
+    func readline {
+        pfile.in stream.readline
+    }
+    
+}
+
+func pfile.write {
+    args 0 aget STREAM_CREATE_FILE_OUT stream =pfile.out
+}
+
+func input {
+    "> " puts
+    def command stdin stream.readline =command
+    
+}
