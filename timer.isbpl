@@ -4,7 +4,7 @@
 
 func main {
     pop
-    def id "/dev/stdin" STREAM_CREATE_FILE_IN stream =id
+    def id "/dev/stdin" STREAM.create.file.in stream =id
     id stream.readline puts
     0
 }

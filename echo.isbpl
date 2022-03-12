@@ -2,10 +2,10 @@
 
 func main {
     def args =args
-    def id "/dev/stdin" STREAM_CREATE_FILE_IN stream =id
-    def oid "/dev/stdout" STREAM_CREATE_FILE_OUT stream =oid
+    def id "/dev/stdin" STREAM.create.file.in stream =id
+    def oid "/dev/stdout" STREAM.create.file.out stream =oid
     while { 1 } {
-        id STREAM_READ stream oid STREAM_WRITE stream
+        id STREAM.read stream oid STREAM.write stream
     }
     0
 }

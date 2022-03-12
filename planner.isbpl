@@ -1,7 +1,7 @@
 "#stream.isbpl" include
 
 def args
-def stdin "/dev/stdin" STREAM_CREATE_FILE_IN stream =stdin
+def stdin "/dev/stdin" STREAM.create.file.in stream =stdin
 def pfile.in
 def pfile.out
 
@@ -10,7 +10,7 @@ func main {
     args alen 1 lt if {
         "Error: No file supplied.\n" puts
     }
-    args 0 aget STREAM_CREATE_FILE_IN  stream =pfile.in
+    args 0 aget STREAM.create.file.in  stream =pfile.in
     pfile.read
 }
 
@@ -22,7 +22,7 @@ func pfile.read {
 }
 
 func pfile.write {
-    args 0 aget STREAM_CREATE_FILE_OUT stream =pfile.out
+    args 0 aget STREAM.create.file.out stream =pfile.out
 }
 
 func input {
