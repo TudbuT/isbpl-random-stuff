@@ -1,0 +1,14 @@
+
+func main {
+    pop
+
+    &test call_it
+
+    0
+}
+
+func call_it { fcall }
+
+func test {
+    "WORKS\n" puts
+}
