@@ -1,0 +1,23 @@
+"the stdlib includes a primitive main function, meaning isbpl can be written without one.\n" puts
+"this will, however, intruduce problems when using funcional programming patterns, because " puts
+"isbpl will execute the code in order, meaning some functions might not be defined yet when " puts
+"calling them.\n" puts
+
+func thisfunctionworks {
+    "Hello world!\n" puts
+    "all" try {
+        thisfunctiondoesntwork
+    } { 
+        puts ": " puts puts "\n" puts 
+        "as you can see, the function defined after it is called does not work when not using a main function\n" puts
+    }
+}
+
+thisfunctionworks
+
+func thisfunctiondoesntwork {
+    "how did we get here" puts
+}
+
+"uncomment to change exit code" #
+"1 exit" #

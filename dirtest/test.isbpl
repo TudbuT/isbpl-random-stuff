@@ -1,0 +1,9 @@
+"dir/test1.isbpl" include
+"dir/test2.isbpl" include
+
+"TEST LOADED\n" puts
+
+func main {
+    pop 0
+    "MAIN CALLED\n" puts
+}
