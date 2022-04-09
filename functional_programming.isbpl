@@ -3,6 +3,7 @@ func main {
     pop
 
     &test call_it
+    { "LAMBDAS WORK TOO \n" puts } &fcall call_it
 
     0
 }
