@@ -1,33 +1,33 @@
 func main {
-  def args =args
-  
-  "R" puts
-  def i 0 =i
-  def m args 0 aget stoi =m
-  while { i m lt } {
-    "a" puts
-    i inc
-  }
-  0 =i
-  m args 1 aget stoi =m
-  while { i m lt } {
-    "w" puts
-    i inc
-  }
-  0 =i
-  m args 2 aget stoi =m
-  while { i m lt } {
-    "r" puts
-    i inc
-  }
-  0 =i
-  m args 3 aget stoi =m
-  while { i m lt } {
-    "~" puts
-    i inc
-  }
-  0 =i
-  "\n" puts
-
-  0 "the program was successful." #
+    def args =args
+    
+    "R" puts
+    def i 0 =i
+    def m args 0 aget stoi =m
+    while { i m lt } {
+        "a" puts
+        i inc
+    }
+    0 =i
+    m args 1 aget stoi =m
+    while { i m lt } {
+        "w" puts
+        i inc
+    }
+    0 =i
+    m args 2 aget stoi =m
+    while { i m lt } {
+        "r" puts
+        i inc
+    }
+    0 =i
+    m args 3 aget stoi =m
+    while { i m lt } {
+        "~" puts
+        i inc
+    }
+    0 =i
+    "\n" puts
+    
+    0 "the program was successful." #
 }

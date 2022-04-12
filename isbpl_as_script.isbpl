@@ -1,3 +1,5 @@
+"#errorstream.isbpl" include
+
 "the stdlib includes a primitive main function, meaning isbpl can be written without one.\n" puts
 "this will, however, intruduce problems when using funcional programming patterns, because " puts
 "isbpl will execute the code in order, meaning some functions might not be defined yet when " puts
@@ -8,7 +10,7 @@ func thisfunctionworks {
     "all" try {
         thisfunctiondoesntwork
     } { 
-        puts ": " puts puts "\n" puts 
+        eputs ": " eputs eputs "\n" eputs 
         "as you can see, the function defined after it is called does not work when not using a main function\n" puts
     }
 }
