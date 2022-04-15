@@ -8,11 +8,15 @@ def TYPE_OOPTEST "ooptest" mktype =TYPE_OOPTEST
 } TYPE_OOPTEST defmethod
 
 func testfn {
-    "oops thats wrong\n" puts
+    itos puts
+    " oops thats wrong\n" puts
 }
 
 func main {
     pop
+    "testing with correct type (should use object method)\n" puts
     5 TYPE_OOPTEST settype testfn
+    "testing without correct type (should use normal function)\n" puts
+    5 testfn
     0
 }
