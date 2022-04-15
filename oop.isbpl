@@ -1,0 +1,18 @@
+
+def TYPE_OOPTEST "ooptest" mktype =TYPE_OOPTEST
+
+"testfn" {
+    "set type back to original" #
+    TYPE_INT settype itos puts
+    " works\n" puts
+} TYPE_OOPTEST defmethod
+
+func testfn {
+    "oops thats wrong\n" puts
+}
+
+func main {
+    pop
+    5 TYPE_OOPTEST settype testfn
+    0
+}
