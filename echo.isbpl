@@ -5,7 +5,7 @@ func main {
     def id "/dev/stdin" STREAM.create.file.in stream =id
     def oid "/dev/stdout" STREAM.create.file.out stream =oid
     while { 1 } {
-        id STREAM.read stream oid STREAM.write stream
+        id stream.readline oid stream.write "\n" oid stream.write
     }
     0
 }
