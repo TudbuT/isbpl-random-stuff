@@ -1,0 +1,14 @@
+def Math "java.lang.Math" JIO class =Math
+def ISBPL "ISBPL" JIO class =ISBPL
+def Boolean "java.lang.Boolean" JIO class =Boolean
+
+func main {
+    pop
+
+    Boolean TRUE ISBPL =debug
+    Boolean TRUE ISBPL =debug
+    5 _double 2 _double Math pow2 TYPE_DOUBLE settype _long ltos puts
+    "\n" puts
+
+    0
+}
