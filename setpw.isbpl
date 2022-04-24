@@ -37,69 +37,75 @@ func main {
         def name
         def pw
         while { s -1 eq not } {
-            s " " jstringsplit =s
-            s alen 0 eq if {
-                "> " puts
-                id stream.readline =s
-                2 stop
-            }
-            s 0 aget =name
-            s alen 1 eq dup if {
-                null =pw
-            } not if {
-                s 1 aget =pw
-            }
+            "Java" try {
+                s " " jstringsplit =s
+                s alen 0 eq if {
+                    "> " puts
+                    id stream.readline =s
+                    2 stop
+                }
+                s 0 aget =name
+                s alen 1 eq dup if {
+                    null =pw
+                } not if {
+                    s 1 aget =pw
+                }
 
-            HTTPRequestType GET "https://tudbut.de" 83 "/api/getUUID?name=" name strconcat 0 anew HTTPRequest new5 =s
-            s send0 parse0 getBody0 =s
-            s "404" eq if {
-                "Error: User not found!\n> " puts
-                id stream.readline =s
-                2 stop
-            }
-            s dup puts =name "\n" puts
+                HTTPRequestType GET "https://tudbut.de" 83 "/api/getUUID?name=" name strconcat 0 anew HTTPRequest new5 =s
+                s send0 parse0 getBody0 =s
+                s "404" eq if {
+                    "Error: User not found!\n> " puts
+                    id stream.readline =s
+                    2 stop
+                }
+                s dup puts =name "\n" puts
 
-            pw dup if {
-                    HTTPRequestType GET
-                    "https://tudbut.de" 83 
-                    "/api/admin/setPassword"
-                        "?uuid="     strconcat
-                        name         strconcat 
-                        "&key="      strconcat
-                        args 0 aget  strconcat
-                        "&password=" strconcat
-                        pw           strconcat 
-                    0 anew 
-                HTTPRequest new5 =s
-            } not if {
-                "Sending deactivate...\n" puts
-                    HTTPRequestType GET
-                    "https://tudbut.de" 83 
-                    "/api/admin/deactivate"
-                        "?uuid="     strconcat
-                        name         strconcat 
-                        "&key="      strconcat
-                        args 0 aget  strconcat
-                    0 anew 
-                HTTPRequest new5 =s
+                pw dup if {
+                        HTTPRequestType GET
+                        "https://tudbut.de" 83 
+                        "/api/admin/setPassword"
+                            "?uuid="     strconcat
+                            name         strconcat 
+                            "&key="      strconcat
+                            args 0 aget  strconcat
+                            "&password=" strconcat
+                            pw           strconcat 
+                        0 anew 
+                    HTTPRequest new5 =s
+                } not if {
+                    "Sending deactivate...\n" puts
+                        HTTPRequestType GET
+                        "https://tudbut.de" 83 
+                        "/api/admin/deactivate"
+                            "?uuid="     strconcat
+                            name         strconcat 
+                            "&key="      strconcat
+                            args 0 aget  strconcat
+                        0 anew 
+                    HTTPRequest new5 =s
+                    s send0 parse0 =s
+                    s getBody0 puts "\nWaiting...\n" puts
+                    5000 sleep
+                    "Sending activate...\n" puts
+
+                        HTTPRequestType GET
+                        "https://tudbut.de" 83 
+                        "/api/admin/enable"
+                            "?uuid="     strconcat
+                            name         strconcat 
+                            "&key="      strconcat
+                            args 0 aget  strconcat
+                        0 anew 
+                    HTTPRequest new5 =s
+                }
                 s send0 parse0 =s
-                s getBody0 puts "\nWaiting...\n" puts
-                5000 sleep
-                "Sending activate...\n" puts
-
-                    HTTPRequestType GET
-                    "https://tudbut.de" 83 
-                    "/api/admin/enable"
-                        "?uuid="     strconcat
-                        name         strconcat 
-                        "&key="      strconcat
-                        args 0 aget  strconcat
-                    0 anew 
-                HTTPRequest new5 =s
+                s getBody0 puts "\n> " puts
+                id stream.readline =s
+            } {
+                pop pop
+                "Error.\n> " puts
+                id stream.readline =s
             }
-            s send0 parse0 =s
-            s getBody0 puts "\n> " puts
-            id stream.readline =s
         }
     } { pop pop printStackTrace0 }
     0
