@@ -1,0 +1,7 @@
+func puts {
+    "java.lang.System" JIO class out print1
+}
+
+func eputs {
+    "java.lang.System" JIO class err print1
+}
