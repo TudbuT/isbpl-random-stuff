@@ -1,16 +1,11 @@
 "#stream.isbpl" include
 "#time.isbpl" include
 
-def fastputs
-        "print" 
-        "java.lang.Object" JIO getclass 1 anewput 
-    "java.io.PrintStream" JIO getclass getDeclaredMethod2 
-=fastputs
 def sout "java.lang.System" JIO class out =sout
 
 "use fastputs" #
 func puts {
-    sout swap 1 anewput fastputs invoke2 pop
+    sout print1
 }
 
 "JIO" try {
