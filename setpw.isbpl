@@ -28,6 +28,11 @@ def Boolean "java.lang.Boolean" JIO class =Boolean
 
 func main {
     def args =args
+    args alen 0 eq if {
+        "Couldn't get first argument: No arguments. Please provide a password.\n" puts
+        "Correct usage: java -cp ISBPL.jar:TuddyLIB.jar ISBPL setpw.isbpl (pw)\n" puts
+        1 exit
+    }
     "Java" try {
         def id 
         "/dev/stdin" STREAM.create.file.in stream =id
