@@ -19,7 +19,7 @@ func puts {
 }
 
 def Boolean "java.lang.Boolean" JIO class =Boolean
-Boolean TRUE JIO context =debug
+"Boolean TRUE JIO context =debug" #
 
 func main {
     def args =args
