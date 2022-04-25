@@ -1,0 +1,19 @@
+"eval.isbpl" include
+"#stream.isbpl" include
+
+def stdin "/dev/stdin" STREAM.create.file.in stream =stdin
+while { 1 } {
+    "> " puts
+
+    def f "eval.isbpl.tmp" STREAM.create.file.out stream =f
+    stdin stream.readline f stream.write
+    f STREAM.close stream
+    "all" try { 
+        "eval.isbpl.tmp" reload
+    } {
+        "ERROR: " swap strconcat puts
+        ": " swap strconcat puts
+        "\n" puts
+    }
+    "InvalidWord" try { eval_main } { pop pop }
+}
