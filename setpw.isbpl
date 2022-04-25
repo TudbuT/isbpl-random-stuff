@@ -18,8 +18,7 @@ func puts {
     1 exit
 }
 
-def Boolean "java.lang.Boolean" JIO class =Boolean
-"Boolean TRUE JIO context =debug" #
+0 JIO context =debug
 
 func main {
     def args =args
@@ -47,6 +46,10 @@ func main {
                 s 0 aget =name
                 s alen 1 eq dup if {
                     null =pw
+                    name "bye" eq if {
+                        "Goodbye!\n" puts
+                        5 stop
+                    }
                 } not if {
                     s 1 aget =pw
                 }
