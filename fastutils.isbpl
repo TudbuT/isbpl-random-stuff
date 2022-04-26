@@ -5,3 +5,11 @@ func puts {
 func eputs {
     "java.lang.System" JIO class err print1
 }
+
+func strsplit {
+        1 anewput
+            "split" 
+            "java.lang.String" 1 anewput 
+        ( "java.lang.String" JIO getclass ) getDeclaredMethod2
+    invoke2
+}
