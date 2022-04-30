@@ -1,0 +1,10 @@
+"#stream.isbpl" include
+native reload
+
+func eval {
+    def f "eval.isbpl.tmp" STREAM.create.file.out stream dup =f
+    stream.write
+    f STREAM.close stream
+    "eval.isbpl.tmp" reload
+    "InvalidWord" try { eval_main } { }
+}
