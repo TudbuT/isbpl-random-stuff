@@ -1,0 +1,15 @@
+#!isbpl
+"#hacks.isbpl" include
+
+
+{ puts } [ "hello" "test" ] foreach
+
+func test {
+    def hello
+    "hello" &hello globalize
+    "=hello" &=hello globalize
+}
+
+test
+"hi" =hello
+hello puts
