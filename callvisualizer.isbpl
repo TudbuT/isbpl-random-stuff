@@ -1,0 +1,30 @@
+#!isbpl
+
+"#stream.isbpl" include
+
+def TYPE_CALL "call" mktype =TYPE_CALL
+
+def id
+
+func main {
+    def file 0 aget =file
+
+    file STREAM.create.file.in stream =id
+    parsecalls
+
+    0
+}
+
+
+func parsecalls {
+    def line
+    id stream.readline pop
+    while { id stream.readline dup =line -1 eq not } {
+        line parsecall
+    }
+}
+
+func parsecall {
+    def line =line
+
+}

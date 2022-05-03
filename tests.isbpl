@@ -1,9 +1,13 @@
 #!isbpl
+
+"this is a script!" #
+
 "#hacks.isbpl" include
 
 
-{ puts } [ "hello" "test" ] foreach
+{ puts } [ "hello" "test" "\n" ] foreach
 
+"globalize test" #
 func test {
     def hello
     "hello" &hello globalize
@@ -11,5 +15,5 @@ func test {
 }
 
 test
-"hi" =hello
+"hi\n" =hello
 hello puts
