@@ -17,7 +17,7 @@ def renames 0 anew =renames
 def file 
 
 func mkcall {
-    TYPE_CALL mkinstance
+    TYPE_CALL mkinstance dup 0 swap =duration
 }
 
 func main {
@@ -104,7 +104,7 @@ func parsecalls {
         line 0 line _array alen 1 - strsub =line
         line _array alen 10 lt if { 2 stop }
         calls [ line parsecall dup =call ] aadd =calls
-        "Call " eputs i itos eputs " (" eputs call num eputs ") parsed successfully.\n" eputs
+        "Call " eputs i itos eputs " (" eputs call num eputs ") loaded successfully.\n" eputs
     }
     calls
 }
@@ -119,7 +119,9 @@ func parsecall {
         dateformat parse1
     call =date
     line 2 aget call =num
-    line 3 aget parsetime call =duration
+    line alen 3 gt if {
+        line 3 aget parsetime call =duration
+    }
     call
 }
 

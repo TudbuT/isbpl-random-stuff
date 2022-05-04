@@ -92,6 +92,27 @@ func addRename {
             "\n" puts
         } printCBN
     }
+    inline "frequency" eq if {
+        {
+            def i =i
+            def item =item
+            def lastDay 0 =lastDay
+            def format "EEE yyyy-MM-dd (DDD)" DF new1 =format
+            {
+                def it =it
+                def f it date format format1 =f
+                lastDay f eq dup if {
+                    "#" puts
+                } not if {
+                    "\n\t" puts
+                    f puts
+                    "\t#" puts
+                }
+                f =lastDay
+            } item foreach
+            "\n" puts
+        } printCBN
+    }
     
     def args inline " " strsplit =args
     args alen if {
