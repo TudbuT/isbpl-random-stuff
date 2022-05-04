@@ -1,0 +1,102 @@
+func addRename {
+    def dest =dest
+    def orig =orig
+    {
+        def i =i pop
+        def item callsByNumber i 1 - aget =item
+        orig item eq dup if {
+            renames [ [ item dest ] ] aadd =renames
+            callsByNumber i 1 - "@" dest strconcat aput
+            dest puts
+        } not if { "-" puts }
+        "\n" puts
+    } printCBN
+}
+
+"all" try {
+    inline "amount" eq if {
+        { 
+            def i =i
+            def item =item
+            { pop "#" puts } item foreach
+            "\n" puts
+        } printCBN
+    }
+    inline "dates" eq if {
+        {
+            def i =i
+            def item =item
+            "\n" puts
+            {
+                def it =it
+                "\t" puts
+                it date toString0 puts 
+                it duration dup if {
+                    "\t for " puts
+                    it duration itos puts
+                    " seconds" puts
+                } not if {
+                    "\t failed." puts
+                }
+                "\n" puts
+            } item foreach
+        } printCBN
+    }
+    inline "load" eq if {
+        def id file ".renames" strconcat STREAM.create.file.in stream =id
+        def line
+        while { id stream.readline dup =line -1 eq not } {
+            line _array alen 2 gt if {
+                line ":=" strsplit =line
+                line 0 aget line 1 aget addRename
+            }
+        }
+        id STREAM.close stream
+    }
+    inline "save" eq inline "bye" eq or if {
+        def id file ".renames" strconcat STREAM.create.file.out stream =id
+        { 
+            def it =it
+            it 0 aget id stream.write
+            ":=" id stream.write
+            it 1 aget id stream.write
+            "\n" id stream.write
+        } renames foreach
+        id STREAM.close stream
+    }
+    inline "bye" eq if {
+        0 "java.lang.System" JIO class exit1
+    }
+    inline "duration" eq if {
+        {
+            def i =i
+            def item =item
+            def amount 0 =amount
+            {
+                def it =it
+                amount it duration + =amount
+            } item foreach
+            amount itos puts "s\t" puts
+            { pop "#" puts } amount 60 / anew foreach
+            "\n" puts
+        } printCBN
+    }
+    inline "fails" eq if {
+        {
+            def i =i
+            def item =item
+            {
+                def it =it
+                it duration not if { "#" puts }
+            } item foreach
+            "\n" puts
+        } printCBN
+    }
+    
+    def args inline " " strsplit =args
+    args alen if {
+        args 0 aget "rename" eq if {
+            args 1 aget args 2 aget addRename
+        }
+    }
+} { "ERROR: " puts puts ": " puts puts "\n" puts }

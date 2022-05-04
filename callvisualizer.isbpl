@@ -1,30 +1,125 @@
 #!isbpl
 
 "#stream.isbpl" include
+"#errorstream.isbpl" include
+"#hacks.isbpl" include
 
+def DF "java.text.SimpleDateFormat" JIO class =DF
 def TYPE_CALL "call" mktype =TYPE_CALL
+"date" TYPE_CALL deffield
+"num" TYPE_CALL deffield
+"duration" TYPE_CALL deffield
 
+def dateformat "yyyy-MM-dd HH:mm:ss" DF new1 =dateformat
 def id
+def calls
+def renames 0 anew =renames
+def file 
+
+func mkcall {
+    TYPE_CALL mkinstance
+}
 
 func main {
-    def file 0 aget =file
+    0 aget =file
 
     file STREAM.create.file.in stream =id
-    parsecalls
+    def callsByNumber 0 anew =callsByNumber
+    "callsByNumber" &callsByNumber globalize
+    parsecalls areverse =calls
+    "Sorting by phone number... Please wait.\n" eputs
+    def n 1 =n
+    { 
+        def it =it
+        def i 0 =i
+        def found -1 =found
+        while { i callsByNumber alen 2 / lt } {
+            callsByNumber i 2 * aget it num eq if {
+                i =found
+            }
+            i inc
+        }
+        found -1 eq dup if {
+            callsByNumber [ it num [ it ] ] aadd =callsByNumber
+        }
+        not if {
+            found 2 * 1 + =i
+
+                callsByNumber 
+                i 
+                    callsByNumber i aget 
+                    [ it ] 
+                aadd 
+            aput
+        }
+        n ++ =n
+    } calls foreach
+    
+    def stdin "/dev/stdin" STREAM.create.file.in stream =stdin
+
+    def inline
+    "OK!\n> " puts
+    while { stdin stream.readline dup =inline -1 eq not } {
+        "callvisualizer/scripts.isbpl" reload
+        "> " puts
+    }
 
     0
 }
+func printCBN {
+    def callable =callable
+    def i 0 =i
+    while { i callsByNumber alen lt } {
+        i 2 % 0 eq dup if {
+            callsByNumber i aget puts ": " puts 
+            def len 20 callsByNumber i aget _array alen - =len
+            while { len 0 gt } {
+                " " char putchar
+                len dec
+            }
+        } not if {
+            callsByNumber i aget i callable fcall
+        }
+        i inc
+    }
+}
 
+func parsetime {
+    def n ":" strsplit =n
+    def s 0 =s
+    n 0 aget stoi 60 * 60 * s + =s
+    n 1 aget stoi 60 * s + =s
+    n 2 aget stoi s + =s
+    s
+}
 
 func parsecalls {
+    def calls 0 anew =calls
     def line
     id stream.readline pop
+    def i 0 =i
+    def call
     while { id stream.readline dup =line -1 eq not } {
-        line parsecall
+        i inc
+        line 0 line _array alen 1 - strsub =line
+        line _array alen 10 lt if { 2 stop }
+        calls [ line parsecall dup =call ] aadd =calls
+        "Call " eputs i itos eputs " (" eputs call num eputs ") parsed successfully.\n" eputs
     }
+    calls
 }
 
 func parsecall {
     def line =line
-
+    line "\t" strsplit =line
+    def call mkcall =call
+            line 0 aget 
+            " "         strconcat
+            line 1 aget strconcat 
+        dateformat parse1
+    call =date
+    line 2 aget call =num
+    line 3 aget parsetime call =duration
+    call
 }
+
