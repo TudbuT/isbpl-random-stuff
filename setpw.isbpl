@@ -8,9 +8,12 @@ func puts {
     System out print1
 }
 
+def HTTPRequestType 
+def HTTPRequest 
+
 "JIO" try {
-    def HTTPRequest "tudbut.net.http.HTTPRequest" JIO class =HTTPRequest
-    def HTTPRequestType "tudbut.net.http.HTTPRequestType" JIO class =HTTPRequestType
+    "tudbut.net.http.HTTPRequest" JIO class =HTTPRequest
+    "tudbut.net.http.HTTPRequestType" JIO class =HTTPRequestType
 } {
     pop pop
     "Couldn't find tudbut.net.http! Please run with TuddyLIB!\n" puts
