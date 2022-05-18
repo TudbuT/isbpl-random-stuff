@@ -51,12 +51,14 @@ func main {
                     null =pw
                     name "bye" eq if {
                         "Goodbye!\n" puts
+                        -1 =s
                         5 stop
                     }
                 } not if {
                     s 1 aget =pw
                 }
 
+                "requesting...\n" puts
                 HTTPRequestType GET "https://tudbut.de" 83 "/api/getUUID?name=" name strconcat 0 anew HTTPRequest new5 =s
                 s send0 parse0 getBody0 =s
                 s "404" eq if {
@@ -108,7 +110,7 @@ func main {
                 s getBody0 puts "\n> " puts
                 id stream.readline =s
             } {
-                pop pop
+                puts ": " puts puts "\n" puts
                 "Error.\n> " puts
                 id stream.readline =s
             }
@@ -118,10 +120,5 @@ func main {
 }
 
 func jstringsplit {
-    "Java" try {
-        def String "java.lang.String" JIO getclass =String
-        1 anewput ( "split" "java.lang.String" JIO getclass 1 anewput String getDeclaredMethod2 ) invoke2
-    } {
-        puts puts printStackTrace0
-    }
+    strsplit
 }

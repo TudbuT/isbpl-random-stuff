@@ -1,0 +1,21 @@
+"define and construct the type" #
+def TYPE_TESTTYPE
+
+construct testtype {
+    thing
+    newline
+    "string field"
+    ; 
+    method {
+        def this =this
+        this thing this ="string field"
+        this "string field" puts
+        this newline puts
+    }
+} =TYPE_TESTTYPE
+
+def inst TYPE_TESTTYPE mkinstance =inst
+
+"hello world" inst =thing
+"\n" inst =newline
+inst method
