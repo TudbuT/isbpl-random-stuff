@@ -6,10 +6,12 @@ func eputs {
     "java.lang.System" JIO class err print1
 }
 
+def StringClass "java.lang.String" JIO getclass =StringClass 
+
 func strsplit {
         1 anewput
             "split" 
-            "java.lang.String" 1 anewput 
-        ( "java.lang.String" JIO getclass ) getDeclaredMethod2
+            [ StringClass ]
+        StringClass getDeclaredMethod2
     invoke2
 }
