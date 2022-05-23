@@ -4,25 +4,34 @@
 native acopy
 
 def doc 
+def context 
 
 func main {
     with args ;
     "# Documentation: " args 0 aget "\n\n\n\n" strconcat strconcat =doc
-    def context Context new =context
+    Context new =context
     def content args 0 aget File new1 ISBPL readFile1 =content
     def frame
     
-    
-        "func include { pop } func test { " content " JIO context frameStack get0 peek0 } test"
-        strconcat
-        strconcat
-    context eval =frame
+    string! { 
+        def isbpldoc^include &include =isbpldoc^include
+        func include { 
+            JIO context level0 JIO context frameStack get0 push1 pop
+            isbpldoc^include fcall
+            JIO context frameStack get0 pop0 pop
+        }
+    } context eval
 
+    content readFrame =frame
 
     frame analyzeFrame
 
     doc puts
     0
+}
+
+func readFrame {
+    "func test { " swap " JIO context frameStack get0 peek0 } test" strconcat strconcat context eval
 }
 
 func analyzeFrame {
