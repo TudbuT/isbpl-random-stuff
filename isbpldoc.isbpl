@@ -1,3 +1,4 @@
+"#errorstream.isbpl" include
 "#multi.isbpl" include
 "#stream.isbpl" include
 
@@ -39,6 +40,8 @@ func analyzeFrame {
 
     def map frame map keySet0 toArray0 =map
     def vars 0 anew =vars
+    def types 0 anew =types
+    def stdin STREAM.stdin STREAM.create.file.in stream =stdin
 
     doc "## Functions\n\n" strconcat =doc
     {
@@ -66,6 +69,55 @@ func analyzeFrame {
         {
             with key ;
             doc "### " key "\n\n    -\n\n\n" strconcat strconcat strconcat =doc
+            "Is `" eputs key eputs "` a type? " eputs 
+            stdin stream.readline dup alen 0 eq not if {
+                char "y" char eq if {
+                    types [ key ] aadd =types
+                }
+            }
         } vars foreach
+    }
+
+    types alen 0 eq not if {
+        doc "---\n\n# Types\n\n" strconcat =doc
+        {
+            with key ;
+            doc "## " key "\n\n    -\n\n" strconcat strconcat strconcat =doc
+            def type
+                JIO stack ( key frame map get1 ) call1
+            context jContext types get1 =type
+
+            type methods keySet0 toArray0 =map
+            0 anew =vars
+            doc "### Methods\n\n" strconcat =doc
+            {
+                with key ;
+                key "&" astartswith if { 2 stop }
+                def isVar key "=" astartswith =isVar
+                isVar not if {
+                    "stop" try {
+                        {
+                            with key1 ;
+                            key1 "=" key strconcat eq if {
+                                1 =isVar
+                                vars [ key ] aadd =vars
+                                "stop" "" throw
+                            }
+                        } map foreach
+                    } { pop pop }
+                }
+                isVar not if {
+                    doc "#### `" key " ::: -> `\n\n    -\n\n\n" strconcat strconcat strconcat =doc
+                }
+            } map foreach
+
+            vars alen 0 eq not if {
+                doc "### Variables\n\n" strconcat =doc
+                {
+                    with key ;
+                    doc "#### " key "\n\n    -\n\n\n" strconcat strconcat strconcat =doc
+                } vars foreach
+            }
+        } types foreach
     }
 }
