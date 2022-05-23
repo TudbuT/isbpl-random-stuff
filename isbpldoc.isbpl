@@ -1,0 +1,62 @@
+"#multi.isbpl" include
+"#stream.isbpl" include
+
+native acopy
+
+def doc 
+
+func main {
+    with args ;
+    "# Documentation: " args 0 aget "\n\n\n\n" strconcat strconcat =doc
+    def context Context new =context
+    def content args 0 aget File new1 ISBPL readFile1 =content
+    def frame
+    
+    
+        "func include { pop } func test { " content " JIO context frameStack get0 peek0 } test"
+        strconcat
+        strconcat
+    context eval =frame
+
+
+    frame analyzeFrame
+
+    doc puts
+    0
+}
+
+func analyzeFrame {
+    with frame ;
+
+    def map frame map keySet0 toArray0 =map
+    def vars 0 anew =vars
+
+    doc "## Functions\n\n" strconcat =doc
+    {
+        with key ;
+        def isVar key "=" astartswith =isVar
+        isVar not if {
+            "stop" try {
+                {
+                    with key1 ;
+                    key1 "=" key strconcat eq if {
+                        1 =isVar
+                        vars [ key ] aadd =vars
+                        "stop" "" throw
+                    }
+                } map foreach
+            } { pop pop }
+        }
+        isVar not if {
+            doc "### `" key " ::: -> `\n\n    \n\n\n" strconcat strconcat strconcat =doc
+        }
+    } map foreach
+
+    vars alen 0 eq not if {
+        doc "## Variables\n\n" strconcat =doc
+        {
+            with key ;
+            doc "### " key "\n\n    \n\n\n" strconcat strconcat strconcat =doc
+        } vars foreach
+    }
+}
