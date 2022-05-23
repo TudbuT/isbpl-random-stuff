@@ -8,8 +8,8 @@ func puts {
     System out print1
 }
 
-def HTTPRequestType 
-def HTTPRequest 
+def HTTPRequest
+def HTTPRequestType
 
 "JIO" try {
     "tudbut.net.http.HTTPRequest" JIO class =HTTPRequest

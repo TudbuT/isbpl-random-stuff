@@ -31,10 +31,13 @@ func addRename {
                 def it =it
                 "\t" puts
                 it date toString0 puts 
-                it duration dup if {
+                it duration 10 lt not dup if {
                     "\t for " puts
                     it duration itos puts
-                    " seconds" puts
+                    " seconds \t(" puts
+                    ( it date getTime0 ) ( it duration 1000 * ) _long + "java.util.Date" JIO class new1 "HH:mm:ss" DF new1 format1 puts
+                    ")" puts
+
                 } not if {
                     "\t failed." puts
                 }
@@ -52,6 +55,15 @@ func addRename {
             }
         }
         id STREAM.close stream
+    }
+    inline "aliases" eq if {
+        { 
+            def it =it
+            it 0 aget puts
+            ":=" puts
+            it 1 aget puts
+            "\n" puts
+        } renames foreach
     }
     inline "save" eq inline "bye" eq or if {
         def id file ".renames" strconcat STREAM.create.file.out stream =id
@@ -81,13 +93,24 @@ func addRename {
             "\n" puts
         } printCBN
     }
+    inline "talks" eq if {
+        {
+            def i =i
+            def item =item
+            {
+                def it =it
+                it duration 10 lt not if { "#" puts }
+            } item foreach
+            "\n" puts
+        } printCBN
+    }
     inline "fails" eq if {
         {
             def i =i
             def item =item
             {
                 def it =it
-                it duration not if { "#" puts }
+                it duration 10 lt if { "#" puts }
             } item foreach
             "\n" puts
         } printCBN
