@@ -48,7 +48,7 @@ func analyzeFrame {
             } { pop pop }
         }
         isVar not if {
-            doc "### `" key " ::: -> `\n\n    \n\n\n" strconcat strconcat strconcat =doc
+            doc "### `" key " ::: -> `\n\n    -\n\n\n" strconcat strconcat strconcat =doc
         }
     } map foreach
 
@@ -56,7 +56,7 @@ func analyzeFrame {
         doc "## Variables\n\n" strconcat =doc
         {
             with key ;
-            doc "### " key "\n\n    \n\n\n" strconcat strconcat strconcat =doc
+            doc "### " key "\n\n    -\n\n\n" strconcat strconcat strconcat =doc
         } vars foreach
     }
 }
