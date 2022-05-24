@@ -51,7 +51,7 @@ func analyzeFrame {
     def types 0 anew =types
     def stdin STREAM.stdin STREAM.create.file.in stream =stdin
 
-    doc "## Functions\n\n" strconcat =doc
+    doc "## >Functions\n\n" strconcat =doc
     {
         with key ;
         def isVar key "=" astartswith =isVar
@@ -73,7 +73,7 @@ func analyzeFrame {
     } map foreach
 
     vars alen 0 eq not if {
-        doc "## Variables\n\n" strconcat =doc
+        doc "## >Variables\n\n" strconcat =doc
         {
             with key ;
             doc "### " key "\n\n    -\n\n\n" strconcat strconcat strconcat =doc
@@ -90,7 +90,7 @@ func analyzeFrame {
         doc "---\n\n# Types\n\n" strconcat =doc
         {
             with key ;
-            doc "## " key "\n\n    -\n\n" strconcat strconcat strconcat =doc
+            doc "## >" key "\n\n    -\n\n" strconcat strconcat strconcat =doc
             "get object by calling var getter" #
             def type JIO stack ( key frame map get1 ) call1 =type
             type gettype TYPE_INT eq dup if {
