@@ -1,3 +1,4 @@
+#!isbpl
 "#errorstream.isbpl" include
 "#multi.isbpl" include
 "#stream.isbpl" include
@@ -9,9 +10,16 @@ def context
 
 func main {
     with args ;
+    args alen 0 eq if {
+        "Provide an ISBPL file!\n" puts
+        1 2 stop
+    }
     "# Documentation: " args 0 aget "\n\n\n\n" strconcat strconcat =doc
     Context new =context
     def content args 0 aget File new1 ISBPL readFile1 =content
+    content "#!isbpl\n" astartswith if {
+        content "#!isbpl\n" alen content alen strsub =content
+    }
     def frame
     
     string! { 
@@ -83,9 +91,14 @@ func analyzeFrame {
         {
             with key ;
             doc "## " key "\n\n    -\n\n" strconcat strconcat strconcat =doc
-            def type
-                JIO stack ( key frame map get1 ) call1
-            context jContext types get1 =type
+            "get object by calling var getter" #
+            def type JIO stack ( key frame map get1 ) call1 =type
+            type gettype TYPE_INT eq dup if {
+                "get the type from it" #
+                context jContext types get1 =type
+            } not if {
+                type gettype context jContext types get1 =type
+            }
 
             type methods keySet0 toArray0 =map
             0 anew =vars
