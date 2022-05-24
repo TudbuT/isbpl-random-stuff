@@ -95,13 +95,13 @@ func analyzeFrame {
             def type JIO stack ( key frame map get1 ) call1 =type
             type gettype TYPE_INT eq dup if {
                 "get the type from it" #
-                context jContext types get1 =type
+                type context jContext types get1 =type
             } not if {
                 type gettype context jContext types get1 =type
             }
 
-            type methods keySet0 toArray0 =map
             0 anew =vars
+            type methods keySet0 toArray0 =map
             doc "### Methods\n\n" strconcat =doc
             {
                 with key ;
